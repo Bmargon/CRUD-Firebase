@@ -1,0 +1,46 @@
+<div>
+    <div>
+        <h1><strong>Listado de alumnos cursando actualmente: </strong></h1>
+        <button [routerLink]="['/alumno', 'nuevo']" class="btn btn-warning"> Nuevo alumno</button>
+    </div>
+    <hr>
+    <br>
+    <br>
+    <!-- cargando -->
+    <div *ngIf="loading">
+        <div class="alert alert-warning" role="alert">
+            La base se esta cargando, espere...
+        </div>
+    </div>
+    <table *ngIf="!loading" class="table">
+        <thead class="thead-dark">
+
+            <tr>
+                <th scope="col">Codigo Alumno</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Segundo Apellido</th>
+                <th scope="col">Carnet</th>
+                <th scope="col">Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let k of listadoAlumnos | key ; let i = index">
+                <th>{{ k }}</th>
+                <td><strong>{{listadoAlumnos[k].nombreAlumno['nombre']}}</strong></td>
+                <td>{{listadoAlumnos[k].nombreAlumno['apellidoUno']}}</td>
+                <td>{{listadoAlumnos[k].nombreAlumno['apellidoDos']}}</td>
+                <td>{{listadoAlumnos[k].carnetAIniciar}}</td>
+                <td>
+                    <div>
+                        <button class="btn btn-warning" [routerLink]="['/alumno', k]" routerLinkActive="router-link-active">Editar</button>
+                        <button class="btn btn-outline-danger" (click)="borrar(k)">Borrar</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+
+        </tbody>
+    </table>
+</div>

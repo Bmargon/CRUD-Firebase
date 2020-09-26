@@ -1,0 +1,68 @@
+<div>
+    <h1><strong>Añadir / Modificar a:</strong> {{form.controls.nombreAlumno.controls.nombre.value}}<small> {{form.controls.nombreAlumno.controls.apellidoUno.value}}</small></h1>
+    <div>
+        <button [routerLink]="['/lista']" class="btn btn-warning"> Listado</button>
+        <button (click)='nuevo()' class="btn btn-outline-warning">Nuevo</button>
+    </div>
+
+    <hr>
+    <form [formGroup]="form" (ngSubmit)="guardar()">
+        <!-- nombreAlumno -->
+
+        <h3>Nombre</h3>
+        <div formGroupName="nombreAlumno" class="row">
+
+            <div class="col">
+                <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre" [ngClass]="{'is-valid': form.controls.nombreAlumno.controls.nombre.valid, 
+                'is-invalid': form.controls.nombreAlumno.controls.nombre.invalid && form.controls.nombreAlumno.controls.nombre.touched}">
+
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" formControlName="apellidoUno" placeholder="Primer apellido" [ngClass]="{'is-valid': form.controls.nombreAlumno.controls.apellidoUno.valid, 
+                'is-invalid': form.controls.nombreAlumno.controls.apellidoUno.invalid && form.controls.nombreAlumno.controls.apellidoUno.touched}">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" formControlName="apellidoDos" placeholder="Segundo apellido" [ngClass]="{'is-valid': form.controls.nombreAlumno.controls.apellidoDos.valid, 
+                'is-invalid': form.controls.nombreAlumno.controls.apellidoDos.invalid && form.controls.nombreAlumno.controls.apellidoDos.touched}">
+            </div>
+
+        </div>
+        <!-- chic@ -->
+        <h3>Género</h3>
+        <div class="form-group">
+
+            <select formControlName="sexo" [ngClass]="{'custom-select': true, 'is-valid': form.controls.sexo.valid}">
+             <option value="hombre">Hombre</option>
+             <option value="mujer">Mujer</option>
+             <option value="otro">Otro</option>
+           </select>
+
+        </div>
+        <!-- nuevo -->
+        <div>
+            <h3>¿Alumno nuevo?</h3>
+
+            <div class="form-check form-check-inline">
+                <input formControlName="nuevo" class="form-check-input" type="radio" name="nuevo" id="inlineRadio1" value="Si">
+                <label class="form-check-label" for="inlineRadio1">Si</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input formControlName="nuevo" class="form-check-input" type="radio" name="nuevo" id="inlineRadio2" value="No">
+                <label class="form-check-label" for="inlineRadio2">No</label>
+            </div>
+        </div>
+
+        <!-- carnet a iniciar -->
+        <div>
+            <h3>Carnet a cursar</h3>
+            <select formControlName="carnetAIniciar" class="form-control">
+                    <option  value="{{carnet.permiso}}" *ngFor="let carnet of carnets">{{carnet.permiso}}</option>
+                </select>
+        </div>
+        <!-- guardar alumno -->
+        <div>
+            <br><br>
+            <button [disabled]="form.invalid" type="submit" class="btn btn-outline-warning btn-block">Guardar</button>
+        </div>
+    </form>
+</div>
